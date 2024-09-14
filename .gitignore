@@ -1,0 +1,20 @@
+*.conf
+data/
+
+# terraform
+.terraform          
+*.tfstate           
+*.tfstate.backup
+*.tfstate.lock.*
+.terraform.lock.hcl
+variables.tf
+
+__pycache__
+*.conf
+venv/
+
+# airflow
+config/
+logs/
+plugins/
+dagRun.py
