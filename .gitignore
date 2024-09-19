@@ -11,10 +11,23 @@ variables.tf
 
 __pycache__
 *.conf
-venv/
 
 # airflow
 config/
 logs/
 plugins/
 dagRun.py
+
+.vscode/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/

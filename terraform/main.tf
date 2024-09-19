@@ -22,7 +22,6 @@ resource "aws_s3_bucket" "fitness-bucket" {
     force_destroy = true 
 }
 
-/*
 
 # Redshift cluster
 resource "aws_redshift_cluster" "fitness-cluster" {
@@ -59,7 +58,7 @@ resource "aws_iam_role" "redshift_role" {
 
 # Security Group for Redshift
 resource "aws_security_group" "sg-redshift" {
-  name = "sg-redshift"  
+  name = "redshiftsecuritygroup"  
   egress {
     from_port       = 0
     to_port         = 0
@@ -74,6 +73,3 @@ resource "aws_security_group" "sg-redshift" {
     cidr_blocks = ["0.0.0.0/0"] 
   }
 }
-
-
-*/

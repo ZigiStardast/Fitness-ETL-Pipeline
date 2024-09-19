@@ -1,0 +1,7 @@
+apache-airflow==2.9.3
+boto3
+configparser
+psycopg2-binary
+pandas
+pathlib
+botocore

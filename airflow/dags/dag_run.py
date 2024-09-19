@@ -1,3 +1,4 @@
+import os
 import pathlib
 import configparser
 from airflow import DAG
@@ -62,8 +63,7 @@ def _last_processed_date(ti):
         print(f"Error connecting to Redshift: {e}")
         fetched_date = None
         
-    ti.xcom_push(key='fetchedDate', value=fetched_date)
-    
+    ti.xcom_push(key='fetchedDate', value=fetched_date)    
 
 def _validate_date(ti):
     fetched_date = ti.xcom_pull(key='fetchedDate', task_ids = 'last_processed_date')
@@ -110,10 +110,44 @@ def _parse_json(ti):
             return 'end_run'
         return 'spark_process'
     return 'end_run'
+                 
+def _save_to_redshift(ti):
+    fetched_date = ti.xcom_pull(key='fetchedDate', task_ids = 'last_processed_date')
+    results_path = '/opt/airflow/spark_files/results.csv'
     
-                
-def _save_to_redshift():
-    pass
+    df_with_fetched_date = pd.read_csv(results_path)
+    df = df_with_fetched_date.loc[df_with_fetched_date.dateFor != fetched_date]
+    
+    df.to_csv(results_path,
+                sep=',',
+                header=True,
+                index=False)
+    
+    s3 = boto3.client('s3')
+    
+    s3_path = 'json/results/results.csv'
+    role_string = f"arn:aws:iam::{ACCOUNT_ID}:role/{RS_ROLE}"
+    
+    
+    s3.meta.client.upload_file(
+            Filename=results_path,
+            Bucket=BUCKET_NAME,
+            Key=f"{s3_path}")
+    
+    conn = connect_to_redshift.connect(host=RS_HOSTNAME, user=RS_USERNAME, password=RS_PASSWORD, dbname=RS_DB, port=RS_PORT)
+    curr = conn.cursor()
+    
+    sql_copy_s3_to_rs = f"""COPY {TABLE_NAME} FROM 's3://{BUCKET_NAME}/{s3_path}' 
+                  iam_role '{role_string}' 
+                  DELIMITER AS ',' 
+                  DATEFORMAT 'YYYY-MM-DD' 
+                  IGNOREHEADER 1 ;"""
+                  
+    curr.execute(sql_copy_s3_to_rs)
+    conn.commit()
+    curr.close()
+    conn.close()
+    os.remove(results_path)
 
 # creating dag
 default_args = {
@@ -144,7 +178,7 @@ with DAG('fitness-dag',
         python_callable=_parse_json,
         do_xcom_push=False
     )
-    
+    '''
     spark_process = BashOperator(
         task_id="spark_process",
         bash_command="python /opt/airflow/sparkFiles/spark_process.py"
@@ -154,14 +188,18 @@ with DAG('fitness-dag',
         task_id="save_to_redshift",
         python_callable=_save_to_redshift
     )
-    
+    '''
     end_run = EmptyOperator(
         task_id="end_run",
         trigger_rule="none_failed_or_skipped"
     )
-    
+    '''
     last_processed_date >> validate_date
     validate_date >> [parse_json, end_run]
     parse_json >> [spark_process, end_run]
     spark_process >> save_to_redshift >> end_run
-    
+    '''
+    #test
+    last_processed_date >> validate_date
+    validate_date >> [parse_json, end_run]
+    parse_json >> end_run
