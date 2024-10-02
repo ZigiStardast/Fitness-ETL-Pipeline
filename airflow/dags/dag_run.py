@@ -4,7 +4,6 @@ import configparser
 from airflow import DAG
 from datetime import datetime, timedelta
 from airflow.operators.python import PythonOperator, BranchPythonOperator
-from airflow.operators.bash import BashOperator
 from airflow.operators.empty import EmptyOperator
 import sys
 from psycopg2 import sql
@@ -14,6 +13,7 @@ import json
 import pandas as pd
 
 scripts_path = str(pathlib.Path(__file__).parents[1].resolve() / 'scripts').replace('\\', '/')
+
 sys.path.insert(1, scripts_path)
 
 import connect_to_redshift
@@ -110,7 +110,8 @@ def _parse_json(ti):
             return 'end_run'
         return 'spark_process'
     return 'end_run'
-                 
+
+'''                
 def _save_to_redshift(ti):
     fetched_date = ti.xcom_pull(key='fetchedDate', task_ids = 'last_processed_date')
     results_path = '/opt/airflow/spark_files/results.csv'
@@ -148,7 +149,7 @@ def _save_to_redshift(ti):
     curr.close()
     conn.close()
     os.remove(results_path)
-
+''' 
 # creating dag
 default_args = {
     'owner': 'zigi_stardast',

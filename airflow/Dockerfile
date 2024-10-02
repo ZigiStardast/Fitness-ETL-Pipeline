@@ -1,4 +1,4 @@
-FROM apache/airflow:2.9.3
+FROM apache/airflow:2.9.3-python3.9
 USER root
 RUN apt-get update -qq && apt-get install vim -qqq
 USER airflow

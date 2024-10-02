@@ -3,5 +3,4 @@ boto3
 configparser
 psycopg2-binary
 pandas
-pathlib
 botocore
