@@ -1,5 +1,4 @@
 *.conf
-data/
 
 # terraform
 .terraform          
