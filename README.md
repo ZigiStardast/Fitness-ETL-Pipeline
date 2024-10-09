@@ -49,10 +49,10 @@ This command will pull and create Docker images and containers for Airflow, acco
 
 Access the Airflow web interface by going to http://localhost:8080/, the default user is <b>airflow</b> and password is <b>airflow</b>.
 Once you’ve signed in, the Airflow homepage displays a list of all available DAGs, including your own and any example DAGs provided by Airflow, sorted in alphabetical order. Any Python script for a DAG saved in the dags/ directory will automatically appear on this page.\
-<b>fitness-dag</b> is the one built for this project.\
+<b>fitness-dag</b> is the one built for this project.
 
 Trigger a DAG Run.\
-In the Graph View page, once the DAG has been unpaused and triggered, you can watch its progress as it moves through each task.\
+In the Graph View page, once the DAG has been unpaused and triggered, you can watch its progress as it moves through each task.
 
 ## Pipeline Tasks
 Task <b>last_processed_date</b>:
