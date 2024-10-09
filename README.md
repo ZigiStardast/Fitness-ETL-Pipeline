@@ -16,9 +16,10 @@ aws_session_token =
 ```
 
 Use Terraform scripts to deploy the necessary AWS resources.
-'''
+```
 cd fitness-data-pipeline/terraform/
-
+```
+```
 terraform init
 terraform apply
 ```
@@ -32,7 +33,8 @@ python load_to_s3.py
 Run docker-compose file:
 ```
 cd fitness-data-pipeline/airflow/
-
+```
+```
 docker-compose up -d
 ```
 This command will pull and create Docker images and containers for Airflow, according to the instructions in the docker-compose.yaml.
