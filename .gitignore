@@ -11,6 +11,7 @@ variables.tf
 
 __pycache__
 *.conf
+__init__.py
 
 # airflow
 config/
@@ -22,6 +23,7 @@ dagRun.py
 
 # Jupyter Notebook
 .ipynb_checkpoints
+*.ipynb
 
 # Environments
 .env
