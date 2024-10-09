@@ -22,7 +22,6 @@ dagRun.py
 .vscode/
 
 # Jupyter Notebook
-.ipynb_checkpoints
 *.ipynb
 
 # Environments
