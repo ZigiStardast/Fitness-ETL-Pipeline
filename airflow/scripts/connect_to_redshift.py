@@ -24,7 +24,13 @@ def create_table_if_doesnt_exist():
     sql_create_table = sql.SQL(
         """ CREATE TABLE IF NOT EXISTS {table} (
                                 id varchar PRIMARY KEY,
-                                dateFor date
+                                dateFor date,
+                                TotalSteps int,
+                                TotalDistance float,
+                                Calories int,
+                                TotalStepsDiff int,
+                                TotalDistanceDiff float,
+                                CaloriesDiff int
             );
         """
     ).format(table=sql.Identifier(TABLE_NAME))

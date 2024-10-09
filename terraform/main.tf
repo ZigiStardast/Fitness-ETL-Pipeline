@@ -31,8 +31,8 @@ resource "aws_redshift_cluster" "fitness-cluster" {
   master_password    = var.master_password
   node_type          = "dc2.large"
   cluster_type       = "single-node"
-  iam_roles = []
-  vpc_security_group_ids = []
+  iam_roles = [aws_iam_role.redshift_role.arn]
+  vpc_security_group_ids = [aws_security_group.sg-redshift.id]
   skip_final_snapshot = true
   publicly_accessible = true
 }

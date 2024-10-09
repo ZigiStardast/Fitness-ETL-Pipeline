@@ -4,3 +4,4 @@ configparser
 psycopg2-binary
 pandas
 botocore
+pyspark
