@@ -4,6 +4,14 @@ This project implements a complete ETL (Extract, Transform, Load) pipeline using
 ## Architecture
 ![workflow 2](https://github.com/user-attachments/assets/29db6618-44cd-45a4-a592-0b7c4a9a4a69)
 
+## Prerequisites
+• AWS account with S3, Redshift, and IAM permissions \
+• Docker \
+• Terraform \
+• Python with necessary libraries \
+• Pyspark \
+• Power Bi
+
 ## Set-up
 Download / clone the repo
 
@@ -47,11 +55,24 @@ Trigger a DAG Run.
 
 In the Graph View page, once the DAG has been unpaused and triggered, you can watch its progress as it moves through each task.
 ## Pipeline Tasks
+Task <b>last_processed_date</b>
+Retrieves the most recent processed date from the Redshift cluster and saves it to an Airflow XCom for later use.
 
-## Prerequisites
-• AWS account with S3, Redshift, and IAM permissions \
-• Docker \
-• Terraform \
-• Python with necessary libraries \
-• Google Data Studio account
+Task <b>validate_date</b>
+Fetches the data stored in the XCom, and based on the retrieved value, returns either the task ID <b>parse_json<b/> or <b>end_run</b>
+
+Task <b>parse_json</b>
+Reads and parses json file, then saves the output to a CSV file <b>parsed_data_daily_activity.csv</b>
+
+Task <b>spark_process</b>
+Executes the pyspark script <b>spark_files/spark_process.py</b>. Saves the output to a CSV file <b>results.csv</b>
+
+Task <b>save_to_redshift</b>
+Saves the processed data <b>results.csv</b> to redshift.
+
+Task <b>end_run</b>
+Empty operator
+
+## Output
+
 
