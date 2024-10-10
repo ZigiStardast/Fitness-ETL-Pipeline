@@ -88,10 +88,10 @@ Empty operator
 
 ## Output
 ![output1](https://github.com/user-attachments/assets/90159f89-3791-423a-9523-021de9ac8d77) \
-For each person (identified by the column Id), the results are displayed for each day from March 25th to May 12th (covering a total of one and a half months). \
+For each person (identified by the column Id), the results are displayed for each day from March 25th to May 12th (covering a total of one and a half months).
 
 ![output2](https://github.com/user-attachments/assets/d9961138-89bc-49e4-b65b-dc022d20ff1a) \
-The top chart shows the change in calories consumed over time for a specific person with the ID 1503960366, while the bottom chart displays the change in distance traveled over time. \
+The top chart shows the change in calories consumed over time for a specific person with the ID 1503960366, while the bottom chart displays the change in distance traveled over time.
 
 
 
