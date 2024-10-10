@@ -23,6 +23,19 @@ aws_secret_access_key =
 aws_session_token = 
 ```
 
+To configure the S3 bucket and Redshift cluster, you will need to provide the necessary configuration information. I have mine located at fitness-data-pipeline/airflow/scripts/configuration.conf
+```
+[aws_config]
+bucket_name = 
+redshift_username = 
+redshift_password = 
+redshift_hostname =  
+redshift_role = 
+redshift_port = 
+redshift_database = 
+account_id = 
+aws_region = 
+```
 Use Terraform scripts to deploy the necessary AWS resources.
 ```
 cd fitness-data-pipeline/terraform/
@@ -74,7 +87,12 @@ Task <b>end_run</b>:
 Empty operator
 
 ## Output
-![output1](https://github.com/user-attachments/assets/90159f89-3791-423a-9523-021de9ac8d77)
-For each person (identified by the column Id), the results are displayed for each day from March 25th to May 12th (covering a total of one and a half months).\
+![output1](https://github.com/user-attachments/assets/90159f89-3791-423a-9523-021de9ac8d77) \
+For each person (identified by the column Id), the results are displayed for each day from March 25th to May 12th (covering a total of one and a half months). \
+
+![output2](https://github.com/user-attachments/assets/d9961138-89bc-49e4-b65b-dc022d20ff1a) \
+The top chart shows the change in calories consumed over time for a specific person with the ID 1503960366, while the bottom chart displays the change in distance traveled over time. \
+
+
 
 
