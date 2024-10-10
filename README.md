@@ -74,5 +74,7 @@ Task <b>end_run</b>:
 Empty operator
 
 ## Output
+![output1](https://github.com/user-attachments/assets/90159f89-3791-423a-9523-021de9ac8d77)
+For each person (identified by the column Id), the results are displayed for each day from March 25th to May 12th (covering a total of one and a half months).\
 
 
